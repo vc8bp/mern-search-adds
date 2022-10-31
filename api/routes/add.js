@@ -4,8 +4,8 @@ const Company = require('../models/company');
 
 
 router.get('/adds', async (req, res) => {
+    console.log("me hit")
     let search = req.query.s || "";
-    search = search.replace("+", " ")
     console.log(search)
     try {
             const adds = await Add.aggregate([
@@ -33,8 +33,7 @@ router.get('/adds', async (req, res) => {
                     }
                 }
             ])
-       
-        res.send(adds)
+        return res.status(200).json(adds)
     } catch (error) {
         console.log(error)
         res.status(500).json({"success": false, "error": "internal server error"})
